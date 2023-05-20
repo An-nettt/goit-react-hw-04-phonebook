@@ -1,11 +1,11 @@
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 
-import ContactForm from './components/ContactForm';
-import ContactList from './components/ContactList';
-import Filter from './components/Filter';
+import ContactForm from './ContactForm';
+import ContactList from './ContactList';
+import Filter from './Filter';
 
-import { Wrapper, Title, ContactsTitle } from './styled';
+import { Wrapper, Title, ContactsTitle } from '../styled';
 
 export default class App extends Component {
   state = {
@@ -24,12 +24,12 @@ export default class App extends Component {
       name,
       number,
     };
-    const auditContacts = this.state.contacts.filter((contact) =>
+    const auditContacts = this.state.contacts.filter(contact =>
       contact.name.includes(newContact.name)
     );
 
     if (auditContacts.length === 0) {
-      this.setState((prevState) => ({
+      this.setState(prevState => ({
         contacts: [newContact, ...prevState.contacts],
       }));
     } else {
@@ -37,7 +37,7 @@ export default class App extends Component {
     }
   };
 
-  changeFilter = (event) => {
+  changeFilter = event => {
     this.setState({ filter: event.currentTarget.value });
   };
 
@@ -45,14 +45,14 @@ export default class App extends Component {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter((contact) =>
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
 
-  deleteContact = (id) => {
-    this.setState((prevState) => ({
-      contacts: prevState.contacts.filter((contact) => contact.id !== id),
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
 

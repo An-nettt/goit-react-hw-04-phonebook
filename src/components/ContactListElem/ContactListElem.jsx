@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ContactListEl, Text, ButtonDel } from '../../styled';
 
 const ContactListElem = ({ contactsEl, onDeleteContact }) => {
@@ -16,3 +17,8 @@ const ContactListElem = ({ contactsEl, onDeleteContact }) => {
 };
 
 export default ContactListElem;
+
+ContactListElem.propTypes = {
+  contactsEl: PropTypes.arrayOf(PropTypes.string),
+  onDeleteContact: PropTypes.func.isRequired,
+};
