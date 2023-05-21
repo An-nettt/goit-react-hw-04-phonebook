@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { PhonebookForm, Text, Input, Button } from '../../styled';
 
-function ContactForm() {
+function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -25,8 +25,9 @@ function ContactForm() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    //   this.props.onSubmit(this.state);
-    //   this.setState({ name: '', number: '' });
+    onSubmit(name, number);
+    setName('');
+    setNumber('');
   };
 
   return (
@@ -57,7 +58,7 @@ function ContactForm() {
 }
 export default ContactForm;
 
-ContactForm.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.number,
-};
+// ContactForm.propTypes = {
+//   name: PropTypes.string,
+//   number: PropTypes.number,
+// };
