@@ -46,10 +46,12 @@ export default function App() {
     const normalizedFilter = filter.toLowerCase();
     console.log(normalizedFilter);
 
-    contacts.filter(contact =>
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
+
+  const filterContacts = getVisibleContacts();
 
   return (
     <Wrapper>
@@ -58,7 +60,7 @@ export default function App() {
 
       <ContactsTitle>Contacts</ContactsTitle>
       <Filter value={filter} onChange={changeFilter} />
-      <ContactList contacts={contacts} onDeleteContact={deleteContact} />
+      <ContactList contacts={filterContacts} onDeleteContact={deleteContact} />
     </Wrapper>
   );
 }
