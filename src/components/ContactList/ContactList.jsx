@@ -2,11 +2,10 @@
 import ContactListElem from '../ContactListElem';
 import { ContactListWrapper } from '../../styled';
 
-const ContactList = ({ contactsList, onDeleteContact }) => {
-  console.log(contactsList);
+const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ContactListWrapper>
-      {contactsList.map(({ id, name, number }) => (
+      {contacts.map(({ id, name, number }) => (
         <ContactListElem
           contactsEl={{ id, name, number }}
           onDeleteContact={onDeleteContact}

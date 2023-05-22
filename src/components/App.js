@@ -1,20 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
+import useLocalStorage from './hooks/useLocalStorage';
 
 import { Wrapper, Title, ContactsTitle } from '../styled';
 
-const useLocalStorage = key => {
-  useEffect(() => {
-    window.localStorage.setItem('key', JSON.stringify(key));
-  }, [key]);
-};
-
 export default function App() {
-  const [contacts, setContacts] = useState([
+  const [contacts, setContacts] = useLocalStorage('contactsList', [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
@@ -39,8 +34,6 @@ export default function App() {
     }
   };
 
-  useLocalStorage(contacts);
-
   const changeFilter = event => {
     setFilter(event.currentTarget.value);
   };
@@ -51,8 +44,9 @@ export default function App() {
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
+    console.log(normalizedFilter);
 
-    return contacts.filter(contact =>
+    contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
@@ -64,10 +58,7 @@ export default function App() {
 
       <ContactsTitle>Contacts</ContactsTitle>
       <Filter value={filter} onChange={changeFilter} />
-      <ContactList
-        contactsList={getVisibleContacts}
-        onDeleteContact={deleteContact}
-      />
+      <ContactList contacts={contacts} onDeleteContact={deleteContact} />
     </Wrapper>
   );
 }
