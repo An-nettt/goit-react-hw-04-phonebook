@@ -44,7 +44,6 @@ export default function App() {
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
-    console.log(normalizedFilter);
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
@@ -64,45 +63,3 @@ export default function App() {
     </Wrapper>
   );
 }
-// export default class App2 extends Component {
-
-//
-// changeFilter = event => {
-//   this.setState({ filter: event.currentTarget.value });
-// };
-
-// getVisibleContacts = () => {
-//   const { contacts, filter } = this.state;
-//   const normalizedFilter = filter.toLowerCase();
-
-//   return contacts.filter(contact =>
-//     contact.name.toLowerCase().includes(normalizedFilter)
-//   );
-// };
-
-// deleteContact = id => {
-//   this.setState(prevState => ({
-//     contacts: prevState.contacts.filter(contact => contact.id !== id),
-//   }));
-// };
-
-// componentDidUpdate(prepProp, prepState) {
-//   if (this.state.contacts !== prepState.contacts) {
-//     localStorage.setItem('contacts', JSON.stringify(contacts));
-//   }
-// }
-
-// componentDidMount() {
-//   const localStorageContacts = localStorage.getItem('contacts');
-//   const newContacts = JSON.parse(localStorageContacts);
-
-//   if (newContacts) {
-//     this.setState({ contacts: newContacts });
-//   }
-// }
-
-// render() {
-//   const filterContacts = this.getVisibleContacts();
-
-// }
-// }
